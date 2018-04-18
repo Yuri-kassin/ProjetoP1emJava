@@ -1,5 +1,6 @@
+import java.util.ArrayList;
 
-class CMapa{
+class CMapa{ //classe criada para guardar o mapa
     private int tamanho_y = 60;
     private int tamanho_x = 30;
 
