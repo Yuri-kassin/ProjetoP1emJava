@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-class CMapa{ //classe criada para guardar o mapa
+public class CMapa{ //classe criada para guardar o mapa
     private int tamanho_y = 60;
     private int tamanho_x = 30;
 
@@ -38,5 +38,17 @@ class CMapa{ //classe criada para guardar o mapa
             {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
             {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
 
+    }
+
+    public int getTamanho_x() {
+        return tamanho_x;
+    }
+
+    public int getTamanho_y() {
+        return tamanho_y;
+    }
+
+    public int[][] getMapa() {
+        return mapa;
     }
 }
