@@ -13,11 +13,9 @@ public class Mover { // classe que vai gerar os numeros atelatorios para os veic
     }
 
     //estas duas funções sao usadas para mover os veiculos ja existentes no mapa
-    public int getX() {
-        return random.nextInt(5);
+    public int getNumber() {
+        return random.nextInt(4)+1;
     }
 
-    public int getY() {
-        return random.nextInt(5);
-    }
+
 }
