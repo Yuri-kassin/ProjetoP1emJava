@@ -31,14 +31,14 @@ public class Magic {
                 }
                 if(Bus.size() != 0) {
                     for (int k = 0; k < Car.size(); k++) {
-                        if (Bus.get(k).getX() == i && Bus.get(k).getY() ==j ) MAPA[i][j]=3;
+                        if (Bus.get(k).getX() == i && Bus.get(k).getY() ==j ) MAPA[i][j]=5;
                     }
                 }
             }
         }
 
     }
-    public void mover(){
+    public int[][] mover(){
         int x;
         if(Car.size() != 0) {
             for (int k = 0; k < Car.size(); k++) {
@@ -74,7 +74,7 @@ public class Magic {
 
             }
         }
-
-
+        possicao();
+        return MAPA;
     }
 }
