@@ -28,13 +28,14 @@ public class Magic {
 
     public int[][] possicao(){
         Reset();
+        Colizao();
         for(int i=0; i<map.getTamanho_x(); i++){
             for(int j=0; j<map.getTamanho_y(); j++){
                 if(Car.size() != 0) {
                     for (int k = 0; k < Car.size(); k++) {
                         if (Car.get(k).getX() == i && Car.get(k).getY() ==j ){
                             MAPA[i][j]=3;
-                            if(MAPAR[i][j]== 2) Fabrica(3);
+                            if(MAPAR[i][j]== 2) Car.add(new Carro(mov.getRandomX(),mov.getRandomY()));
                         }
                     }
                 }
@@ -42,7 +43,7 @@ public class Magic {
                     for (int k = 0; k < Mot.size(); k++) {
                         if (Mot.get(k).getX() == i && Mot.get(k).getY() ==j ){
                             MAPA[i][j]=4;
-                            if(MAPAR[i][j]== 2) Fabrica(4);
+                            if(MAPAR[i][j]== 2) Mot.add(new Moto(mov.getRandomX(),mov.getRandomY()));
                         }
 
                     }
@@ -51,12 +52,13 @@ public class Magic {
                     for (int k = 0; k < Bus.size(); k++) {
                         if (Bus.get(k).getX() == i && Bus.get(k).getY() ==j ) {
                             MAPA[i][j]=5;
-                            if(MAPAR[i][j]== 2) Fabrica(5);
+                            if(MAPAR[i][j]== 2) Bus.add(new Bussao(mov.getRandomX(),mov.getRandomY()));
                         }
                     }
                 }
             }
         }
+
         return MAPA;
     }
 
@@ -107,16 +109,90 @@ public class Magic {
         return possicao();
     }
 
-    public void Fabrica(int x){
-        if(x==3){
-            Car.add(new Carro(mov.getRandomX(),mov.getRandomY()));
+    public void Colizao(){
+        /// Colizao com apenas onibus
+        for(int i=0; i<Bus.size(); i++){
+            for(int j=0; j<Bus.size(); j++){
+                if(i!=j){
+                    if(Bus.get(i).getX() == Bus.get(j).getX() && Bus.get(i).getY() == Bus.get(j).getY()) {
+                        Bus.remove(Bus.get(j));
+                        Bus.remove(Bus.get(i));
+                        if(i-2>0-1)i-=2;
+                        if(j-2>-1)j-=2;
+                        if(Bus.size() == 0){
+                            j=Bus.size();
+                            i=Bus.size();
+                        }
+                    }
+                }
+            }
         }
-        else if (x==4){
-            Mot.add(new Moto(mov.getRandomX(),mov.getRandomY()));
+        ///colizao com apenas Moto
+        for(int i=0; i<Mot.size(); i++) {
+            for (int j = 0; j < Mot.size(); j++) {
+                if (i != j) {
+                    if (Mot.get(i).getX() == Mot.get(j).getX() && Mot.get(i).getY() == Mot.get(j).getY()) {
+                        Mot.remove(Mot.get(j));
+                        Mot.remove(Mot.get(i));
+                        if(i-2 >-1)i-=2;
+                        if(j-2 >-1)j-=2;
+                        if(Mot.size() == 0){
+                            j=Mot.size();
+                            i=Mot.size();
+                        }
+                    }
+                }
+            }
         }
-        else if(x==5){
-            Bus.add(new Bussao(mov.getRandomX(),mov.getRandomY()));
+        ///colizao com apenas Carro
+        for(int i=0; i<Car.size(); i++) {
+            for (int j = 0; j < Car.size(); j++) {
+                if (i != j) {
+                    if (Car.get(i).getX() == Car.get(j).getX() && Car.get(i).getY() == Car.get(j).getY()) {
+                        Car.remove(Car.get(j));
+                        Car.remove(Car.get(i));
+                        if(i-2>-1)i-=2;
+                        if(j-2>-1)j-=2;
+                        if(Mot.size() == 0){
+                            j=Car.size();
+                            i=Car.size();
+                        }
+
+                    }
+                }
+            }
         }
+        ///colizao moto com onibus
+        for(int i =0; i<Mot.size(); i++){
+            for(int j=0; j<Bus.size(); j++ ){
+                if (Mot.get(i).getX() == Bus.get(j).getX() && Mot.get(i).getY() == Bus.get(j).getY()){
+                    Mot.remove(Mot.get(i));
+                    if(Mot.size() == 0)j=Bus.size();
+                    if(i-1>0-1)i--;
+                }
+            }
+        }
+        ///colizao moto com carro
+        for(int i =0; i<Mot.size(); i++){
+            for(int j=0; j<Car.size(); j++ ){
+                if (Mot.get(i).getX() == Car.get(j).getX() && Mot.get(i).getY() == Car.get(j).getY()){
+                    Mot.remove(Mot.get(i));
+                    if(Mot.size() == 0)j=Car.size();
+                    if(i-1>0-1)i--;
+                }
+            }
+        }
+        ///colizao carro com onibus
+        for(int i =0; i<Car.size(); i++){
+            for(int j=0; j<Bus.size(); j++ ){
+                if (Car.get(i).getX() == Bus.get(j).getX() && Car.get(i).getY() == Bus.get(j).getY()){
+                    Car.remove(Car.get(i));
+                    if(Car.size() == 0)j=Bus.size();
+                    if(i-1>-1)i--;
+                }
+            }
+        }
+
 
     }
 
