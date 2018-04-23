@@ -16,6 +16,7 @@ public class Magic {
             Bus.add(new Bussao(mov.getRandomX(),mov.getRandomY()));//add 10 busao
         }
     }
+
     public void possicao(){
         for(int i=0; i<map.getTamanho_x(); i++){
             for(int j=0; j<map.getTamanho_y(); j++){
@@ -38,6 +39,7 @@ public class Magic {
         }
 
     }
+
     public int[][] mover(){
         int x;
         if(Car.size() != 0) {
@@ -71,10 +73,22 @@ public class Magic {
                 else if(x==4)Bus.get(k).setY(Bus.get(k).getY()-Bus.get(k).getVelocidade());
                 if(Bus.get(k).getX() >= map.getTamanho_x()) Bus.get(k).setX(Bus.get(k).getX()-map.getTamanho_x());
                 if(Bus.get(k).getY() >= map.getTamanho_y()) Bus.get(k).setY(Bus.get(k).getY()-map.getTamanho_y());
-
+                System.out.printf("X: %d Y: %d ",Bus.get(k).getX(),Bus.get(k).getY());
             }
         }
-        possicao();
         return MAPA;
     }
+
+    public int getCar() {
+        return Car.size();
+    }
+
+    public int getMot() {
+        return Mot.size();
+    }
+
+    public int getBus() {
+        return Bus.size();
+    }
+
 }
