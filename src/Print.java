@@ -18,6 +18,11 @@ public class Print {
             for(int i=0; i<map.getTamanho_x(); i++){
                 for (int j=0; j<map.getTamanho_y(); j++){
                     if(MAPA[i][j]==0) System.out.print(" ");
+                    else if(MAPA[i][j] == 1)System.out.print("\u001b[47m \033[0m");
+                    else if(MAPA[i][j] == 2)System.out.print("\u001b[42m \033[0m");
+                    else if(MAPA[i][j] == 3)System.out.print("\u001b[41m \033[0m");
+                    else if(MAPA[i][j] == 4)System.out.print("\u001b[44;1m \033[0m");
+                    else if(MAPA[i][j] == 5)System.out.print("\u001b[43m \033[0m");
                     else System.out.print(MAPA[i][j]);
                 }
                 System.out.println();
