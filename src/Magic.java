@@ -7,7 +7,7 @@ public class Magic {
     private CMapa map = new CMapa();//instanciando o obj map da classe CMapa
     private Mover mov = new Mover();//instanciando o bj mov da classe Mover
     private int[][] MAPA= new int[map.getTamanho_x()][map.getTamanho_y()];
-    private int[][] MAPAR;
+    private int[][] MAPAR = map.getMapa();
 
     public Magic(){
         for( int i=0; i<10; i++){ //add os primeiros 30 veiculos, sendo 10 de cada tipo
@@ -27,24 +27,32 @@ public class Magic {
     }
 
     public int[][] possicao(){
-
-
         Reset();
         for(int i=0; i<map.getTamanho_x(); i++){
             for(int j=0; j<map.getTamanho_y(); j++){
                 if(Car.size() != 0) {
                     for (int k = 0; k < Car.size(); k++) {
-                        if (Car.get(k).getX() == i && Car.get(k).getY() ==j ) MAPA[i][j]=3;
+                        if (Car.get(k).getX() == i && Car.get(k).getY() ==j ){
+                            MAPA[i][j]=3;
+                            if(MAPAR[i][j]== 2) Fabrica(3);
+                        }
                     }
                 }
                 if(Mot.size() != 0) {
                     for (int k = 0; k < Mot.size(); k++) {
-                        if (Mot.get(k).getX() == i && Mot.get(k).getY() ==j ) MAPA[i][j]=4;
+                        if (Mot.get(k).getX() == i && Mot.get(k).getY() ==j ){
+                            MAPA[i][j]=4;
+                            if(MAPAR[i][j]== 2) Fabrica(4);
+                        }
+
                     }
                 }
                 if(Bus.size() != 0) {
-                    for (int k = 0; k < Car.size(); k++) {
-                        if (Bus.get(k).getX() == i && Bus.get(k).getY() ==j ) MAPA[i][j]=5;
+                    for (int k = 0; k < Bus.size(); k++) {
+                        if (Bus.get(k).getX() == i && Bus.get(k).getY() ==j ) {
+                            MAPA[i][j]=5;
+                            if(MAPAR[i][j]== 2) Fabrica(5);
+                        }
                     }
                 }
             }
@@ -65,6 +73,7 @@ public class Magic {
                 if(Car.get(k).getY() >= map.getTamanho_y()) Car.get(k).setY(Car.get(k).getY()-map.getTamanho_y());
                 if(Car.get(k).getX() <= 0) Car.get(k).setX(Car.get(k).getX()+map.getTamanho_x());
                 if(Car.get(k).getY() <= 0) Car.get(k).setY(Car.get(k).getY()+map.getTamanho_y());
+
             }
         }
         if(Mot.size() != 0) {
@@ -91,11 +100,24 @@ public class Magic {
                 if(Bus.get(k).getY() >= map.getTamanho_y()) Bus.get(k).setY(Bus.get(k).getY()-map.getTamanho_y());
                 if(Bus.get(k).getX() <= 0) Bus.get(k).setX(Bus.get(k).getX()+map.getTamanho_x());
                 if(Bus.get(k).getY() <= 0) Bus.get(k).setY(Bus.get(k).getY()+map.getTamanho_y());
-                System.out.printf("X: %d Y: %d ",Bus.get(k).getX(),Bus.get(k).getY());
+//                System.out.printf("X: %d Y: %d ",Bus.get(k).getX(),Bus.get(k).getY());
             }
         }
 
         return possicao();
+    }
+
+    public void Fabrica(int x){
+        if(x==3){
+            Car.add(new Carro(mov.getRandomX(),mov.getRandomY()));
+        }
+        else if (x==4){
+            Mot.add(new Moto(mov.getRandomX(),mov.getRandomY()));
+        }
+        else if(x==5){
+            Bus.add(new Bussao(mov.getRandomX(),mov.getRandomY()));
+        }
+
     }
 
     public int getCar() {
