@@ -8,7 +8,7 @@ public class Print {
         Magic mag = new Magic();
         int[][] MAPA ;
         System.out.println("ate aqui foi!");
-        mag.possicao();
+
         while(x == 0){
 //            Thread.sleep(1000);
             MAPA = mag.mover();
