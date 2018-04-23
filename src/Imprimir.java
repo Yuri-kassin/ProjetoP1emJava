@@ -1,16 +1,14 @@
 import java.util.ArrayList;
 
-public class Print {
+public class Imprimir {
 
-    public Print(){
+    public void imprimir(){
         CMapa map = new CMapa();
         int x = 0;
         Magic mag = new Magic();
         int[][] MAPA ;
-        System.out.println("ate aqui foi!");
 
         while(x == 0){
-//            Thread.sleep(1000);
             MAPA = mag.mover();
             System.out.printf("Carros: %d", mag.getCar());
             System.out.printf(" Motos: %d", mag.getMot());
@@ -23,14 +21,10 @@ public class Print {
                     else if(MAPA[i][j] == 3)System.out.print("\u001b[41m \033[0m");
                     else if(MAPA[i][j] == 4)System.out.print("\u001b[44;1m \033[0m");
                     else if(MAPA[i][j] == 5)System.out.print("\u001b[43m \033[0m");
-                    else System.out.print(MAPA[i][j]);
                 }
                 System.out.println();
             }
             System.out.println();
         }
     }
-
-
-
 }
