@@ -1,6 +1,7 @@
 /**
  * @author YuriKassin
  *
+ *
  */
 
 public class Main {
