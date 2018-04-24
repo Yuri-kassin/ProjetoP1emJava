@@ -1,6 +1,19 @@
+/**
+ * Classe Magic, aonde a Magia acontece,
+ * Aqui sera aonde ocorrera o possicionamento dos veiculos a acao de movimento,
+ * o funcionamento das fabricas e as colizoes
+ * @author YuriKassin
+ */
+
 import java.util.ArrayList;
 
 public class Magic {
+    /**
+     * criacao da arraylist de cada tipo das classes de veiculo e tb criacao
+     * do mapa base e final
+     * @param MAPAR
+     * @param MAPA
+     */
     private ArrayList<Carro> Car = new ArrayList<>();
     private ArrayList<Moto> Mot = new ArrayList<>();
     private ArrayList<Bussao> Bus = new ArrayList<>();
@@ -9,6 +22,9 @@ public class Magic {
     private int[][] MAPA= new int[map.getTamanho_x()][map.getTamanho_y()];
     private int[][] MAPAR = map.getMapa();
 
+    /**
+     * Construtor para os primeiros 30 veiculos
+     */
     public Magic(){
         for( int i=0; i<10; i++){ //add os primeiros 30 veiculos, sendo 10 de cada tipo
             Car.add(new Carro(mov.getRandomX(),mov.getRandomY()));//add 10 carros
@@ -17,6 +33,9 @@ public class Magic {
         }
     }
 
+    /**
+     * Resetando o Mapa final com Base no mapa base
+     */
     public void Reset(){
         MAPAR = map.getMapa();
         for(int i=0; i<map.getTamanho_x(); i++){
@@ -26,6 +45,11 @@ public class Magic {
         }
     }
 
+    /**
+     * funcao possicao que possiciona os veiculos no mapa finale retornando o mapa final para
+     * a funçao mover
+     * @return MAPA
+     */
     public int[][] possicao(){
         Reset();
         Colizao();
@@ -62,10 +86,16 @@ public class Magic {
         return MAPA;
     }
 
+    /**
+     * Funcao mover para mover os veiculos de acordo com o numero fornecido pela classe Mover e que retorna
+     * o mapa final dada pela funcao
+     * @return possicao
+     */
     public int[][] mover(){
         int x;
         if(Car.size() != 0) {
-            for (int k = 0; k < Car.size(); k++) {
+
+            for (int k = 0; k < Car.size(); k++) { //movendo os carros
                 x = mov.getNumber();
                 if(x==1)Car.get(k).setY(Car.get(k).getY()+Car.get(k).getVelocidade());
                 else if(x==2)Car.get(k).setX(Car.get(k).getX()+Car.get(k).getVelocidade());
@@ -79,7 +109,7 @@ public class Magic {
             }
         }
         if(Mot.size() != 0) {
-            for (int k = 0; k < Mot.size(); k++) {
+            for (int k = 0; k < Mot.size(); k++) { //movendo as motos
                 x = mov.getNumber();
                 if(x==1)Mot.get(k).setY(Mot.get(k).getY()+Mot.get(k).getVelocidade());
                 else if(x==2)Mot.get(k).setX(Mot.get(k).getX()+Mot.get(k).getVelocidade());
@@ -92,7 +122,7 @@ public class Magic {
             }
         }
         if(Bus.size() != 0) {
-            for (int k = 0; k < Bus.size(); k++) {
+            for (int k = 0; k < Bus.size(); k++) { //movendo os onibus
                 x = mov.getNumber();
                 if(x==1)Bus.get(k).setY(Bus.get(k).getY()+Bus.get(k).getVelocidade());
                 else if(x==2)Bus.get(k).setX(Bus.get(k).getX()+Bus.get(k).getVelocidade());
@@ -102,13 +132,15 @@ public class Magic {
                 if(Bus.get(k).getY() >= map.getTamanho_y()) Bus.get(k).setY(Bus.get(k).getY()-map.getTamanho_y());
                 if(Bus.get(k).getX() <= 0) Bus.get(k).setX(Bus.get(k).getX()+map.getTamanho_x());
                 if(Bus.get(k).getY() <= 0) Bus.get(k).setY(Bus.get(k).getY()+map.getTamanho_y());
-//                System.out.printf("X: %d Y: %d ",Bus.get(k).getX(),Bus.get(k).getY());
             }
         }
 
         return possicao();
     }
 
+    /**
+     * Funcao colizao vai ser aonde as colizoes iram ocorrer
+     */
     public void Colizao(){
         /// Colizao com apenas onibus
         for(int i=0; i<Bus.size(); i++){

@@ -1,3 +1,8 @@
+/**
+ * Classe aonde imprime o mapa final
+ * @author YuriKassin
+ */
+
 import java.util.ArrayList;
 
 public class Imprimir {

@@ -1,3 +1,9 @@
+/**
+ * Classe Do Mapa e suas funcoes de Get de tamanho do mapa
+ *
+ * @author YuriKassin
+ */
+
 import java.util.ArrayList;
 
 public class CMapa{ //classe criada para guardar o mapa

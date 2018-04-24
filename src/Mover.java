@@ -1,3 +1,8 @@
+/**
+ * Classe que oferece numeros aleatorios para mover os veiculos e possiciona-los na classe Magic
+ * @author YuriKassin
+ */
+
 import java.util.Random;
 
 public class Mover { // classe que vai gerar os numeros atelatorios para os veiculos
